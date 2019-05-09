@@ -1,0 +1,142 @@
+{
+  "users": [
+    {
+      "username": "saillesh",
+      "password": "sample",
+      "RoleId": 2,
+      "IsDisable": false,
+      "id": 1
+    },
+    {
+      "username": "digambar",
+      "password": "sample",
+      "RoleId": 2,
+      "IsDisable": false,
+      "id": 2
+    },
+    {
+      "username": "test",
+      "password": "test",
+      "RoleId": 1,
+      "IsDisable": false,
+      "id": 4
+    },
+    {
+      "username": "arnel",
+      "password": "arnel",
+      "RoleId": 2,
+      "IsDisable": false,
+      "id": 5
+    },
+    {
+      "username": "snehal",
+      "password": "sam",
+      "RoleId": 2,
+      "IsDisable": false,
+      "id": 6
+    },
+    {
+      "username": "rest",
+      "password": "rest",
+      "RoleId": 2,
+      "IsDisable": false,
+      "id": 7
+    }
+  ],
+  "contacts": [
+    {
+      "name": "nishant",
+      "phone": "123",
+      "email": "nishant@gmail.com",
+      "image": "asdasd",
+      "id": 2
+    },
+    {
+      "name": "Saillesh Pawar",
+      "phone": "7351594444",
+      "email": "sailleshp@quinnox.com",
+      "image": "asdasda",
+      "id": 3
+    }
+  ],
+  "tasks": [
+    {
+      "title": "learn jquery",
+      "completed": false,
+      "data": "2019-04-10T12:19:12.048Z",
+      "id": 1
+    },
+    {
+      "title": "learn jquery  azure",
+      "completed": false,
+      "data": "2019-04-10T12:19:16.081Z",
+      "id": 2
+    },
+    {
+      "name": "diga",
+      "phone": "213",
+      "email": "diga@gmail.com",
+      "image": "sadasda",
+      "id": 3
+    },
+    {
+      "title": "learn jquery  azure",
+      "completed": false,
+      "date": "2019-05-07T13:51:47.532Z",
+      "id": 4
+    },
+    {
+      "title": "asdasd",
+      "completed": false,
+      "date": "2019-05-07T16:07:48.923Z",
+      "id": 5
+    },
+    {
+      "title": "adasdsaf",
+      "completed": false,
+      "date": "2019-05-07T16:08:48.938Z",
+      "id": 6
+    },
+    {
+      "title": "asdasda",
+      "completed": false,
+      "date": "2019-05-07T16:09:03.986Z",
+      "id": 7
+    },
+    {
+      "title": "saa",
+      "completed": false,
+      "date": "2019-05-07T16:09:18.905Z",
+      "id": 8
+    },
+    {
+      "title": "gggg",
+      "completed": false,
+      "date": "Tue May 07 2019 21:40:07 GMT+0530 (India Standard Time)",
+      "id": 9
+    },
+    {
+      "title": "gggg",
+      "completed": false,
+      "date": "2019-05-07T16:10:07.498Z",
+      "id": 10
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
