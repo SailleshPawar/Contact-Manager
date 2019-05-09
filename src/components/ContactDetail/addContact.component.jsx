@@ -102,7 +102,7 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = dispatch => ({
     onAddContact: (contact) =>
-    dispatch(addContact(contact.name,contact.phone,contact.email,contact.image,contact.userid,JSON.parse(localStorage.user)[0].id)), 
+    dispatch(addContact(contact.name,contact.phone,contact.email,contact.image,JSON.parse(localStorage.user)[0].id)), 
     onUpdateField: (key, value) =>  dispatch({ type: contactConstants.UPDATE_FIELD_EDITOR, key, value })
 });
 

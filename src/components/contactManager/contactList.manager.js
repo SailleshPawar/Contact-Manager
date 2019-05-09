@@ -7,8 +7,7 @@ import { getContact,deleteContact } from '../actions/contact.actions';
 class TaskList extends Component {
 
     componentDidMount() {
-      debugger;
-        this.props.getContact();
+        this.props.getContact(this.props.authentication.user.id);
     }    
      
         
@@ -87,7 +86,8 @@ class TaskList extends Component {
 function mapStateToProps(state) { //state = store.getState()
     debugger;
     return {
-        contacts: state.Contact.records
+        contacts: state.Contact.records,
+        authentication:state.authentication
     }
 }
 
@@ -95,8 +95,8 @@ function mapDispatchToProps(dispatch) {
     debugger;
     return {
 
-      getContact: () =>
-      dispatch(getContact()),
+      getContact: (id) =>
+      dispatch(getContact(id)),
         handleDelete:(row)=>{dispatch(deleteContact(row))}
 
     }

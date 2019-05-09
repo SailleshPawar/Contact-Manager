@@ -1,15 +1,14 @@
 import axios from 'axios';
-import { userConstants } from '../_constants';
 export const ADD_CONTACT = 'ADD_CONTACT';
 export const REMOVE_CONTACT = 'REMOVE_CONTACT';
 export const CONTACTS_LOADED = 'CONTACTS_LOADED';
 const apiUrl = 'http://localhost:3000/contacts';
 
 
-export function getContact() {
+export function getContact(userId) {
     debugger;
     return (dispatch) => { //dispatch = store.dispatch
-        axios.get(apiUrl)
+        axios.get(`${apiUrl}?userid=${userId}`)
         .then((result) => {
             dispatch({
                 type: "CONTACTS_LOADED",
@@ -35,7 +34,6 @@ export function deleteContact(contact ){
 }
 
 export function addContact(name,phone,email,image,userid) {
-
     return (dispatch) => {
         const data = {
         name: name,

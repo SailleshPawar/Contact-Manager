@@ -8,8 +8,6 @@ import { store } from './components/_helpers';
 // console.log(store.getState());
 // setup fake backend
 import { render } from 'react-dom';
-import { configureFakeBackend } from './components/_helpers';
-configureFakeBackend();
 
 
 

@@ -13,7 +13,6 @@ class Admin extends Component {
       }
       
     render() {
-      debugger;
      const {UsersList,authentication}=this.props;
 
       const headers=[
@@ -97,7 +96,6 @@ class Admin extends Component {
 
  
 function mapStateToProps(state) {
-  debugger;
   const { UsersList,authentication } = state;
   return {
     UsersList,
