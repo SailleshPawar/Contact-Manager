@@ -22,7 +22,10 @@ import { connect } from 'react-redux';
         </NavItem>
         
 
-
+        <NavItem>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </NavItem>
 
         <NavItem>
 {

@@ -6,56 +6,7 @@ import { connect } from 'react-redux';
 import {getUsers,toggleActiveUser} from './../actions/user.actions';
 class Admin extends Component {
    
-    //    disableUser(user){
-    //     Axios.put(`http://localhost:3001/users/${user.id}`,{
-    //         "username":user.username,
-    //         "password": user.password,
-    //         "RoleId":user.RoleId,
-    //         "IsDisable":true
-    //     }).then((response) => {
-    //         console.log(response);
-    //         this.LoadUsers();
-    //     }).catch(err => {
-            
-    //        // this.showErrorToaster();
-    //         console.log(err);
     
-    //     })
-    // }
-    
-    //    enableUser(user){
-
-    //       Axios.put(`http://localhost:3001/users/${user.id}`,{
-    //         "username": user.username,
-    //         "password": user.password,
-    //         "RoleId":user.RoleId,
-    //         "IsDisable":false
-    //     }).then((response) => {
-    //         this.LoadUsers();
-    //         console.log(response);
-    //     }).catch(err => {
-    //         this.LoadUsers();
-    //        // this.showErrorToaster();
-    //         console.log(err);
-    
-    //     })
-    //   }
-
-    //   LoadUsers=()=>{
-         
-    //     Axios.get(`http://localhost:3001/users`)
-    //     .then(res => {
-    //       this.setState({
-    //           records: res.data,
-    //       });
-    //     })
-    //     .catch(err => {
-    //       console.log(err);
-    //     });
-    //   }
-
-    
-
       componentDidMount(){
 
         this.props.onGetUser();
@@ -63,7 +14,7 @@ class Admin extends Component {
       
     render() {
       debugger;
-     const UsersList=this.props.UsersList;
+     const {UsersList,authentication}=this.props;
 
       const headers=[
         {
@@ -103,19 +54,27 @@ class Admin extends Component {
                 ></div>),
               Cell: row => (
                   <div>
-                    {row.original.IsDisable? <Button   onClick={
+                    
+                    {
+                      row.original.IsDisable && row.original.username!==authentication.username? <Button   onClick={
                         () => 
                         {
                           this.props.onToggleUser(row.original);
                                      
                        }
                     
-                  } color="success">Enable</Button>: <Button  onClick={
+                  } color="success">Enable</Button>: 
+                  
+                  
+                  row.original.username!==authentication.username?
+                  
+                  <Button  onClick={
                       () =>  {
                           this.props.onToggleUser(row.original);
 
                       }
-                      } color="danger">Disable</Button>  } 
+                      } color="danger">Disable</Button>
+                  :""      } 
                   </div>
               )
            }
@@ -139,9 +98,10 @@ class Admin extends Component {
  
 function mapStateToProps(state) {
   debugger;
-  const { UsersList } = state;
+  const { UsersList,authentication } = state;
   return {
-    UsersList
+    UsersList,
+    authentication
   };
 }
 
