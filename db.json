@@ -18,21 +18,21 @@
       "username": "test",
       "password": "test",
       "RoleId": 1,
-      "IsDisable": true,
+      "IsDisable": false,
       "id": 4
     },
     {
       "username": "arnel",
       "password": "arnel",
       "RoleId": 2,
-      "IsDisable": true,
+      "IsDisable": false,
       "id": 5
     },
     {
       "username": "snehal",
       "password": "sam",
       "RoleId": 2,
-      "IsDisable": true,
+      "IsDisable": false,
       "id": 6
     },
     {
@@ -45,15 +45,15 @@
     {
       "username": "nikhil",
       "password": "test",
-      "IsDisable": false,
       "RoleId": 1,
+      "IsDisable": false,
       "id": 8
     },
     {
       "username": "kush",
       "password": "kush",
-      "IsDisable": false,
       "RoleId": 1,
+      "IsDisable": false,
       "id": 9
     },
     {
@@ -66,8 +66,8 @@
     {
       "username": "scott",
       "password": "scott",
-      "IsDisable": false,
       "RoleId": 1,
+      "IsDisable": false,
       "id": 11
     },
     {
@@ -79,14 +79,6 @@
     }
   ],
   "contacts": [
-    {
-      "name": "Saillesh Pawar",
-      "phone": "7351594444",
-      "email": "asd@gmail.com",
-      "image": "asdas",
-      "userid": 7,
-      "id": 2
-    },
     {
       "name": "sandeep",
       "phone": "222",
@@ -102,6 +94,14 @@
       "image": "asdasd",
       "userid": 7,
       "id": 4
+    },
+    {
+      "name": "Saillesh Pawar",
+      "phone": "7351594444",
+      "email": "asd@gmail.com",
+      "image": "asdas",
+      "userid": 7,
+      "id": 5
     }
   ],
   "tasks": [
