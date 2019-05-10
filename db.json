@@ -18,21 +18,21 @@
       "username": "test",
       "password": "test",
       "RoleId": 1,
-      "IsDisable": false,
+      "IsDisable": true,
       "id": 4
     },
     {
       "username": "arnel",
       "password": "arnel",
       "RoleId": 2,
-      "IsDisable": false,
+      "IsDisable": true,
       "id": 5
     },
     {
       "username": "snehal",
       "password": "sam",
       "RoleId": 2,
-      "IsDisable": false,
+      "IsDisable": true,
       "id": 6
     },
     {
