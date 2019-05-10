@@ -11,3 +11,5 @@ Install the dependencies
 1) Yarn install
 2)  json-server --watch db.json --port 3000
 3) Yarn run start
+
+![](ReactProject.gif)
