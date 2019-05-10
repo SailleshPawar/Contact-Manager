@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
  class  headerComponent extends Component { 
 
   render(){
-
+debugger;
     const {authentication}=this.props;
    return ( 
    <div className="carousel fade-carousel slide" data-ride="carousel" data-interval="4000" id="bs-carousel"> 
@@ -18,6 +18,13 @@ import { connect } from 'react-redux';
 {
   authentication.loggedIn  && 
 <Link to="/login">Logout</Link>
+}
+        </NavItem>
+        
+  <NavItem>
+{
+  !authentication.loggedIn  && 
+<Link to="/login">Login</Link>
 }
         </NavItem>
         
@@ -50,7 +57,6 @@ import { connect } from 'react-redux';
  }
 
  function mapStateToProps(state) { //state = store.getState()
-  debugger;
   return {
       
       authentication: state.authentication

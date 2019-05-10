@@ -6,12 +6,20 @@ import { ADD_CONTACT, CONTACTS_LOADED,REMOVE_CONTACT } from '../actions/contact.
 
 export function Contact(state = new ContactReducer('', '','','',[],0,[]), action) { 
   switch (action.type) {
+
+    case "CONTACT_VALIDATION":
+    return {
+      ...state,
+      'errors':action.errors
+    }
+    
       case contactConstants.REGISTER_REQUEST:
       return [
         ...state,
         action.task
       ];
 
+      
       case REMOVE_CONTACT:
       const records=state.records.filter(m => m.id !== action.contact.id)
       return { ...state, ['records']: records };

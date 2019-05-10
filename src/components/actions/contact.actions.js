@@ -6,7 +6,6 @@ const apiUrl = 'http://localhost:3000/contacts';
 
 
 export function getContact(userId) {
-    debugger;
     return (dispatch) => { //dispatch = store.dispatch
         axios.get(`${apiUrl}?userid=${userId}`)
         .then((result) => {
@@ -19,6 +18,15 @@ export function getContact(userId) {
     }
 }
 
+
+export function dispatchError(errors){
+    return (dispatch) => { //dispatch = store.dispatch
+        dispatch({
+            type: "CONTACT_VALIDATION",
+            errors: errors===null?{}:errors
+        }); 
+    }
+}
 
 export function deleteContact(contact ){
     return (dispatch) => { //dispatch = store.dispatch

@@ -107,9 +107,6 @@ function mapStateToProps(state) {
      onGetUser: () =>
     dispatch(getUsers()), 
     onToggleUser:(user)=>dispatch(toggleActiveUser(user))
-
-     //onUpdateField: (key, value) =>  dispatch({ type: contactConstants.UPDATE_FIELD_EDITOR, key, value })
  });
 
 export default connect(mapStateToProps,mapDispatchToProps)(Admin);
-// export default Admin;

@@ -1,13 +1,32 @@
 
 import { userConstants } from '../_constants';
-import Login from '../models/login'
-export function users(state = {}, action) {
+import User from  '../models/user'
+export function user(state = new User('','','',2,false,undefined,{}), action) {
     switch (action.type) {
-      case userConstants.GETALL_REQUEST:
-        return {
-          loading: true
-        };
-        
+
+      case "ROLE_CHANGED":
+      return{
+        ...state,
+        RoleId:action.RoleId===2?1:2
+      }
+
+      case "SIGNUP_VALIDATIONSTATE":
+
+      return{...state,
+         RoleId:action.RoleId
+        }
+      case "USER_CREATED":
+      return {...state,
+      username:'',
+      password:'',
+      confirmPassword:'',
+      errors:{}
+      };   
+      case "SIGNUP_VALIDATIONSTATE":
+       return { ...state,'errors':action.errors===null?{}:action.errors};
+
+      case "SIGNUP_UPDATE_FIELD_EDITOR":
+      return { ...state,  [action.key]: action.value,'errors':{}};
       case userConstants.GETALL_SUCCESS:
         return {
           items: action.users

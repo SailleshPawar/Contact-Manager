@@ -10,7 +10,8 @@ export  const userActions = {
     register,
     getAll,
     delete: _delete,
-    getUsers
+    getUsers,
+    signUp
     
 };
 // export const USER_LOADED = 'USER_LOADED'
@@ -23,7 +24,6 @@ export const ACCOUNTLOCKED='ACCOUNTLOCKED'
 
 
 export function getUsers() {
-    debugger;
      return (dispatch) => { //dispatch = store.dispatch
          axios.get(userApiUrl)
          .then((result) => {
@@ -37,7 +37,6 @@ export function getUsers() {
  }
  
  export function toggleActiveUser(user) {
-     debugger;
      return (dispatch) => { //dispatch = store.dispatch
          axios.put(`${userApiUrl}/${user.id}`,{
             "username":user.username,
@@ -57,12 +56,30 @@ export function getUsers() {
 
  
  
-
-
+export function register(user){
+ return (dispatch) => { //dispatch = store.dispatch
+         axios.post("http://localhost:3000/users",{
+            "username": user.username,
+            "password": user.password,
+            "IsDisable":user.IsDisable,
+            "RoleId":user.RoleId
+        })
+         .then((response) => {
+              dispatch({
+                type: "USER_CREATED",
+                user:response.data
+            }); 
+             const { from } =  { from: { pathname: "/login" } };   
+            history.push(from);
+            
+          }
+        ).catch((err) => {});
+         
+     }
+}
 
 
 export function login(username, password){
-    debugger;
     let user=[];
     return (dispatch) => { //dispatch = store.dispatch
         axios.get(userApiUrl)
@@ -93,7 +110,6 @@ export function login(username, password){
         }
             }
                    
-                debugger;
                 if(user.length>0 && user[0].RoleId===2 && !user[0].IsDisable){
                     const { from } =  { from: { pathname: "/" } };   
                     localStorage.setItem('user', JSON.stringify(user));
@@ -120,88 +136,6 @@ export function login(username, password){
 
 
 
-// export function login(username, password){
-//    let user=[];
-//    debugger
-//      return (dispatch) => { //dispatch = store.dispatch
-//         axios.get(userApiUrl)
-//         .then((result) => {
-//         debugger;
-
-       
-
-//        user =result.data.filter(item=>item.username===username && 
-//         item.password===password);     
-        
-        
-//         dispatch({
-//             type: USER_LOADED,
-//             users:result.data
-//         }); 
-           
-//         debugger;
-//         if(user.length>0 && user[0].RoleId===2 && !user[0].IsDisable){
-//             const { from } =  { from: { pathname: "/" } };   
-            
-//             history.push(from);
-//             //this.props.history.push(from);
-//            this.setState({authenticated: true})
-//             }
-//         else if(user.length>0 && user[0].RoleId===1 && !user[0].IsDisable){
-//             const { from } =  { from: { pathname: "/UserList" } };   
-           
-//             history.push(from);
-//             // this.props.history.push(from);
-//         }
-            
-//         })
-//         .catch((err) => {
-//             console.log(err);
-//         });
-//     }
-
-//         //     console.log(response);
-//         //     user = response.data.filter(item=>item.username===this.state.data.username && 
-//         //         item.password===this.state.data.password);         
-//         // if(user.length>0 && user[0].RoleId===2 && !user[0].IsDisable){
-//         //     const { from } =  { from: { pathname: "/" } };   
-//         //     localStorage.setItem('user', JSON.stringify(user));
-//         //     window.location=from.pathname;
-//         //     //this.props.history.push(from);
-//         //    this.setState({authenticated: true})
-//         //     }
-//         // else if(user.length>0 && user[0].RoleId===1 && !user[0].IsDisable){
-//         //     const { from } =  { from: { pathname: "/UserList" } };   
-//         //     localStorage.setItem('user', JSON.stringify(user));
-//         //     window.location=from.pathname;
-//         //     // this.props.history.push(from);
-//         //    this.setState({authenticated: true})
-        
-      
-// }
- 
-// function login(username, password) {
-//     return dispatch => {
-//         dispatch(request({ username }));
-
-//         userService.login(username, password)
-//             .then(
-//                 user => { 
-//                     dispatch(success(user));
-//                     history.push('/');
-//                 },
-//                 error => {
-//                     dispatch(failure(error.toString()));
-//                     //dispatch(alertActions.error(error.toString()));
-//                 }
-//             );
-//     };
-
-//     function request(user) { return { type: userConstants.LOGIN_REQUEST, user } }
-//     function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
-//     function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
-// }
-
 function logout() {
     return (dispatch) => { //dispatch = store.dispatch
         localStorage.removeItem('user');       
@@ -210,28 +144,17 @@ function logout() {
             }); 
     }}
 
-function register(user) {
-    return dispatch => {
-        dispatch(request(user));
 
-        userService.register(user)
-            .then(
-                user => { 
-                    dispatch(success());
-                    history.push('/login');
-                   // dispatch(alertActions.success('Registration successful'));
-                },
-                error => {
-                    dispatch(failure(error.toString()));
-                  //  dispatch(alertActions.error(error.toString()));
-                }
-            );
-    };
+function signUp(){
+return (dispatch) => { //dispatch = store.dispatch
+       const { from } =  { from: { pathname: "/SignUp" } };   
+       history.push(from); 
+        dispatch({
+                type: "SIGNUP"
+            }); 
+    }}
+    
 
-    function request(user) { return { type: userConstants.REGISTER_REQUEST, user } }
-    function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } }
-    function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } }
-}
 
 function getAll() {
     return dispatch => {

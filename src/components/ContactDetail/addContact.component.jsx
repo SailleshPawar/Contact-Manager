@@ -2,17 +2,13 @@ import React,{Component} from 'react';
 import { Form, Button, Input,FormFeedback,FormGroup,Col, Row} from 'reactstrap';
  import { connect } from 'react-redux';
  import {contactConstants} from '../_constants';
- import { addContact } from '../actions/contact.actions';
+ import { addContact,dispatchError } from '../actions/contact.actions';
 
 
 //addContact.component
 class AddContact extends Component {
   constructor(props) {
     super(props);
-
-
-
-    
     const updateFieldEvent =
       key => ev => this.props.onUpdateField(key, ev.target.value);
     this.changeName = updateFieldEvent('name');
@@ -25,7 +21,6 @@ class AddContact extends Component {
    
   }
 
-
     validate=()=>{
       let errors={};
       const {Contact}=this.props;
@@ -34,13 +29,12 @@ class AddContact extends Component {
       if(Contact.email==="")errors.email="Email cannot be blank!";
       if(Contact.image==="")errors.image="Image Url cannot be blank!";
       return Object.keys(errors).length === 0 ? null : errors;
-     //  return errors;
   }
 
      handleSubmit=(e)=>{
       e.preventDefault();
       const errors = this.validate();
-      this.setState({ errors: errors || {} });
+       this.props.onValidationDone(errors);
       if (errors) return;
       this.props.onAddContact(this.props.Contact);
     }
@@ -101,6 +95,7 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = dispatch => ({
+  onValidationDone:(errors)=>dispatch(dispatchError(errors)),
     onAddContact: (contact) =>
     dispatch(addContact(contact.name,contact.phone,contact.email,contact.image,JSON.parse(localStorage.user)[0].id)), 
     onUpdateField: (key, value) =>  dispatch({ type: contactConstants.UPDATE_FIELD_EDITOR, key, value })

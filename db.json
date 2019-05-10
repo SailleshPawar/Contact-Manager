@@ -41,6 +41,41 @@
       "RoleId": 2,
       "IsDisable": false,
       "id": 7
+    },
+    {
+      "username": "nikhil",
+      "password": "test",
+      "IsDisable": false,
+      "RoleId": 1,
+      "id": 8
+    },
+    {
+      "username": "kush",
+      "password": "kush",
+      "IsDisable": false,
+      "RoleId": 1,
+      "id": 9
+    },
+    {
+      "username": "temp",
+      "password": "temp",
+      "IsDisable": false,
+      "RoleId": 1,
+      "id": 10
+    },
+    {
+      "username": "scott",
+      "password": "scott",
+      "IsDisable": false,
+      "RoleId": 1,
+      "id": 11
+    },
+    {
+      "username": "admin",
+      "password": "admin",
+      "IsDisable": false,
+      "RoleId": 1,
+      "id": 12
     }
   ],
   "contacts": [
@@ -51,6 +86,22 @@
       "image": "asdas",
       "userid": 7,
       "id": 2
+    },
+    {
+      "name": "sandeep",
+      "phone": "222",
+      "email": "sandy@gmail.com",
+      "image": "adsasda",
+      "userid": 7,
+      "id": 3
+    },
+    {
+      "name": "virender",
+      "phone": "1231",
+      "email": "viru@gmail.com",
+      "image": "asdasd",
+      "userid": 7,
+      "id": 4
     }
   ],
   "tasks": [

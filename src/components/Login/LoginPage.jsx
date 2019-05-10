@@ -1,7 +1,8 @@
 import React,{Component} from 'react';
 import { Form, Button, Input,FormFeedback,Alert } from 'reactstrap';
 import { connect } from 'react-redux';
-import {authActions,userActions}  from '../actions';
+import { Link,  } from 'react-router-dom';
+import {authActions,userActions,signUp}  from '../actions';
 
 import {authenticationConstants} from '../_constants'
 
@@ -26,24 +27,13 @@ class LoginForm extends Component {
        //  return errors;
     }
 
-    
-
-    //  loadSignUp=()=>
-    //  {
-    //      console.log("clled");
-    //     const { from } =  { from: { pathname: "/SignUp" } };   
-    //     this.props.history.push(from);
-       
-    //  }
 
      handleSubmit=(e)=>{
         e.preventDefault();
         const errors = this.validate();
         this.props.onValidationDone(errors);
-      // this.setState({ errors: errors || {} });
-       if (errors) return;
-    //    this.setState({ submitted: true });
-       this.props.onLogin(this.props.authentication.username,this.props.authentication.password);
+      if (errors) return;
+    this.props.onLogin(this.props.authentication.username,this.props.authentication.password);
     }
      
     render()
@@ -94,7 +84,7 @@ class LoginForm extends Component {
                 </div>
                 <div className="card-footer">
                     <div className="d-flex justify-content-center links">
-                        Don't have an account?<a href="JavaScript:Void(0);" onClick={this.loadSignUp}  >Sign Up</a>
+                    Don't have an account? <Link to="/SignUp">Sign Up</Link>
                     </div>
                     <div className="d-flex justify-content-center">
                         <a href="JavaScript:Void(0);">Forgot your password?</a>
@@ -112,7 +102,8 @@ function mapDispatchToProps(dispatch) {
     dispatch(userActions.logout()),
     onValidationDone:(errors)=>dispatch(authActions.dispatchError(errors)),
     onLogin:(username,password)=>dispatch(userActions.login(username,password)),
-    onUpdateField: (key, value) =>  dispatch({ type: authenticationConstants.UPDATE_FIELD_EDITOR, key, value })
+    onUpdateField: (key, value) =>  dispatch({ type: authenticationConstants.UPDATE_FIELD_EDITOR, key, value }),
+    signUp:()=>dispatch(userActions.signUp())
     }
 }
   
@@ -125,19 +116,5 @@ function mapStateToProps(state) {
 }
 
 
-
-  
-//   const mapDispatchToProps = (dispatch) => ({
-//       onLogout: () =>
-//       dispatch(userActions.logout()), 
-//      onLogin:(username,password)=>dispatch(userActions.login(username,password))
-
-      
-//      // onUpdateField: (key, value) =>  dispatch({ type: contactConstants.UPDATE_FIELD_EDITOR, key, value })
-//   });
-  
-
   export default connect(mapStateToProps,mapDispatchToProps)(LoginForm);
-// const connectedLoginPage = connect(mapStateToProps,mapDispatchToProps)(LoginForm);
-//  export { connectedLoginPage as LoginForm }; 
 

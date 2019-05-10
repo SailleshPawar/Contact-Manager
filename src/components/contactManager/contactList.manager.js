@@ -83,8 +83,7 @@ class TaskList extends Component {
 
 
 
-function mapStateToProps(state) { //state = store.getState()
-    debugger;
+function mapStateToProps(state) { 
     return {
         contacts: state.Contact.records,
         authentication:state.authentication
@@ -92,7 +91,6 @@ function mapStateToProps(state) { //state = store.getState()
 }
 
 function mapDispatchToProps(dispatch) {
-    debugger;
     return {
 
       getContact: (id) =>

@@ -1,6 +1,8 @@
 import { userConstants ,authenticationConstants} from '../_constants';
-debugger;
-const initialState =  { loggedIn: false,IsValidCrendentials:true, username:'',password:'',ErrorMessage:'',errors:{} };
+let user = JSON.parse(localStorage.getItem('user'));
+const initialState = user? 
+                  { user:{ ...JSON.parse(localStorage.getItem('user'))[0] },loggedIn: true,IsValidCrendentials:true, username:'',password:'',ErrorMessage:'',errors:{} }:
+                  { loggedIn: false,IsValidCrendentials:true, username:'',password:'',ErrorMessage:'',errors:{} };
 
 export function authentication(state = initialState, action) {
   switch (action.type) { 

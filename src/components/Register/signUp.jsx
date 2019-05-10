@@ -1,69 +1,49 @@
 import React,{Component} from 'react';
-import { Form, Button, Input,FormFeedback,Alert,FormGroup,Label , Col, Row} from 'reactstrap';
+import { Form, Button,CustomInput, Input,FormFeedback,Alert,FormGroup,Label , Col, Row} from 'reactstrap';
 import Axios from "axios";
+import { connect } from 'react-redux';
+import {authenticationConstants} from '../_constants'
+import {userActions}  from '../actions';
 class SignUp extends Component {
-    state = {
+    constructor(props)
+    {
+        super(props);
 
-         data:{
-             username:'',
-             password:'',
-             confirmpassword:''
-         },
-         errors:{}
-      }
-
+         const updateFieldEvent =
+        key => ev => this.props.onUpdateField(key, ev.target.value);
+      this.changeUserName = updateFieldEvent('username');
+      this.changePassword = updateFieldEvent('password');
+      this.changeConfirmPassword = updateFieldEvent('confirmPassword');
+    }
       validate=()=>{
         let errors={};
-        const {data}=this.state;
-        if(data.username==="")errors.username="UserName cannot be blank!";
-        if(data.password==="")errors.password="Password cannot be blank!";
-        if(data.confirmpassword==="")errors.confirmpassword="Confirm Password cannot be blank!";
-        if(data.confirmpassword!==data.password)errors.password="Password doesn't match!";
+        const {user}=this.props;
+        if(user.username==="")errors.username="UserName cannot be blank!";
+        if(user.password==="")errors.password="Password cannot be blank!";
+        if(user.confirmPassword==="")errors.confirmPassword="Confirm Password cannot be blank!";
+        if(user.confirmPassword!==user.password)errors.password="Password doesn't match!";
         return Object.keys(errors).length === 0 ? null : errors;
-       //  return errors;
     }
 
+
+    toggleRole=(e)=>{
+     this.props.onRoleToggle(this.props.user.RoleId);
+
+    }
 
     handleSubmit=(e)=>{
         e.preventDefault();
         const errors = this.validate();
-       this.setState({ errors: errors || {} });
-       if (errors) return;
-        const {data}=this.state;
-        console.log(data);
-
-        Axios.post("http://localhost:3001/users",{
-            "username": data.username,
-            "password": data.password,
-            "IsDisable":false,
-            "RoleId":2
-        }).then((response) => {
-            console.log(response);
-            const { from } =  { from: { pathname: "/login" } };   
-            this.props.history.push(from);
-            console.log(response);
-        }).catch((err) => {
-            if(err.response && err.response.status===400){
-                const errors={...this.state.errors};
-                errors.username=err.response.data;
-            }
-           // this.showErrorToaster();
-            console.log(err);
-
-        })
+        this.setState({ errors: errors || {} });
+         this.props.onValidate(errors);
+        if (errors) return;
+        this.props.onRegister(this.props.user);       
     }
 
-    handleChange=({ currentTarget: input })=>{
-        const data = this.state.data;
-        data[input.name] = input.value;
-        this.setState({ data,
-            IsValidCrendentials:true,
-            errors:{...this.state.errors,[input.name]:''}
-        });
-     }
+    
 
     render() { 
-        const {errors}=this.state;
+        const {user}=this.props;
         return ( 
         
           
@@ -77,8 +57,8 @@ class SignUp extends Component {
                             <div className="input-group-prepend">
                                 <span className="input-group-text"><i className="fas fa-user"></i></span>
                             </div>
-                            <Input id="username" onChange={this.handleChange} name="username" invalid={errors.username?true:false} placeholder="Username"  />
-                            <FormFeedback>{errors.username}</FormFeedback>
+                            <Input id="username" value={user.username} onChange={(event)=>this.changeUserName(event)}  name="username" invalid={user.errors.username?true:false} placeholder="Username"  />
+                            <FormFeedback>{user.errors.username}</FormFeedback>
                         </div>          
           </div>
        
@@ -86,8 +66,8 @@ class SignUp extends Component {
                             <div className="input-group-prepend">
                                 <span className="input-group-text"><i className="fas fa-user"></i></span>
                             </div>
-                            <Input id="password" type="password" onChange={this.handleChange} invalid={errors.password?true:false} name="password" placeholder="Password"  />
-                            <FormFeedback>{errors.password}</FormFeedback>
+                            <Input id="password" value={user.password}  type="password" onChange={(event)=>this.changePassword(event)} invalid={user.errors.password?true:false} name="password" placeholder="Password"  />
+                            <FormFeedback>{user.errors.password}</FormFeedback>
                         </div> 
       
        
@@ -95,10 +75,18 @@ class SignUp extends Component {
                             <div className="input-group-prepend">
                                 <span className="input-group-text"><i className="fas fa-user"></i></span>
                             </div>
-                            <Input id="confirmpassword" type="password" onChange={this.handleChange} invalid={errors.confirmpassword?true:false} name="confirmpassword" placeholder="Confirm Password"  />
-                            <FormFeedback>{errors.confirmpassword}</FormFeedback>
+                            <Input id="confirmpassword" value={user.confirmPassword} type="password" onChange={(event)=>this.changeConfirmPassword(event)} invalid={user.errors.confirmPassword?true:false} name="confirmPassword" placeholder="Confirm Password"  />
+                            <FormFeedback>{user.errors.confirmPassword}</FormFeedback>
                         </div> 
-       
+        <div className="input-group form-group">
+               <div className="input-group-prepend">
+          <span className="input-group-text"><i className="fas fa-user">Role    </i></span> 
+           </div>            
+            <CustomInput type="switch" className="toggle" id="exampleCustomSwitch" onChange={this.toggleRole} name="roleid" label="Administrator" />
+         
+      </div>
+
+
           <div className="control-group">
            
             <div className="controls">
@@ -109,5 +97,28 @@ class SignUp extends Component {
      );
     }
 }
- 
-export default SignUp;
+ function mapDispatchToProps(dispatch) {
+    return {
+    onRoleToggle:(value)=>dispatch({
+                  type: "ROLE_CHANGED",
+                  RoleId: value
+    }),
+        onValidate:(errors)=>dispatch({
+                 type: "SIGNUP_VALIDATIONSTATE",
+                 errors: errors
+             }),
+        onRegister:(user)=>dispatch(userActions.register(user)),
+        onUpdateField: (key, value) =>  dispatch({ type: "SIGNUP_UPDATE_FIELD_EDITOR", key, value }),
+     }
+}
+  
+
+function mapStateToProps(state) {
+    const { user } = state;
+    return {
+        user
+    };
+}
+
+  export default connect(mapStateToProps,mapDispatchToProps)(SignUp);
+
