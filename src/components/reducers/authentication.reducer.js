@@ -6,6 +6,19 @@ const initialState = user?
 
 export function authentication(state = initialState, action) {
   switch (action.type) { 
+
+    case "ACCOUNTLOCKED":
+    return{
+      ...state,
+      IsValidCrendentials:false,
+      ErrorMessage:'Your Account has been locked!'
+    }
+    case "INVALIDCREDENTIAL":
+    return{
+      ...state,
+      IsValidCrendentials:false,
+      ErrorMessage:'Invalid UserName and Password!'
+    }
     case userConstants.LOGIN_FAILURE:
       return {};
     case userConstants.LOGOUT:

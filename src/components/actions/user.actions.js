@@ -111,13 +111,19 @@ export function login(username, password){
             }
                    
                 if(user.length>0 && user[0].RoleId===2 && !user[0].IsDisable){
-                    const { from } =  { from: { pathname: "/" } };   
+                    const { from } =  { from: { pathname: "/" } };
+                    debugger;
+                    //as the backend api also sends password to the client removing password
+                    //A real back end should never send any secrets to the client which has the risk    
+                    delete user[0].password;
                     localStorage.setItem('user', JSON.stringify(user));
                     history.push(from);
                    
                     }
                 else if(user.length>0 && user[0].RoleId===1 && !user[0].IsDisable){
                     const { from } =  { from: { pathname: "/UserList" } };   
+                    debugger;
+                    delete user[0].password;
                     localStorage.setItem('user', JSON.stringify(user));
                     history.push(from);
                    

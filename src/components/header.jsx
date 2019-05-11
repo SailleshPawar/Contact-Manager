@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
  class  headerComponent extends Component { 
 
   render(){
-debugger;
     const {authentication}=this.props;
    return ( 
    <div className="carousel fade-carousel slide" data-ride="carousel" data-interval="4000" id="bs-carousel"> 
